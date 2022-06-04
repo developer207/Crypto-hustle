@@ -43,7 +43,7 @@ const coinDetails = () => {
     <div>
       {loding && <LinearProgress />}
       <div className='flex pt-10'>
-        <div className='w-[30%] border h-screen flex flex-col items-center space-y-5 px-3'>
+        <div className='w-[30%] h-screen flex flex-col items-center space-y-5 px-3'>
           <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="" />
           <h2 className='text-white text-center text-3xl font-bold'>Name</h2>
           <p className='text-white '>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae natus rem nobis voluptatem reiciendis aspernatur illo laborum, sapiente quidem, tempora cumque quasi, aliquid quibusdam blanditiis commodi id delectus. Est, pariatur.</p>
@@ -53,7 +53,7 @@ const coinDetails = () => {
           </div>
           
         </div>
-        <div className='w-[70%] border h-screen px-3'>
+        <div className='w-[70%] h-screen px-3'>
          
           <Charts historical={historical} days={days} />
         </div>
