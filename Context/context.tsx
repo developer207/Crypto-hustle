@@ -26,7 +26,7 @@ interface IAuth {
   openAlert: boolean | undefined,
   message: string | null,
   handleSetOpenAlert: (open: boolean) => void,
-  err:string | null
+  err: string | null
 
 
 }
@@ -39,7 +39,7 @@ export const AuthContext = createContext<IAuth>({
   openAlert: false,
   message: null,
   handleSetOpenAlert: () => { },
-  err:null
+  err: null
 
 });
 
