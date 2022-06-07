@@ -1,7 +1,13 @@
 import Router from 'next/router'
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../Context/context'
 
 const Navbar = () => {
+    const {user,logout}=useContext(AuthContext)
+    const logOUt = () => {
+        logout()
+        Router.push('/login')
+    }
     return (
         <div className=''>
             <div className=' bg-[#2f2f2f] flex justify-between py-4 px-10 items-center'>
@@ -15,7 +21,9 @@ const Navbar = () => {
 
                 </div>
                 <div>
-                    <img className='h-9 w-9 rounded-full' src="https://res.cloudinary.com/zarmariya/image/upload/v1653461978/bnmnc4bhltfkqnqan0g2.png" alt="" />
+                    <img
+                        onClick={logOUt}
+                        className='cursor-pointer h-9 w-9 rounded-full' src="https://res.cloudinary.com/zarmariya/image/upload/v1653461978/bnmnc4bhltfkqnqan0g2.png" alt="" />
                 </div>
             </div>
         </div>

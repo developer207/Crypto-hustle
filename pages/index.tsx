@@ -1,9 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useContext } from 'react'
+import Alerts from '../components/Alerts'
 import Main from '../components/Main'
 import Navbar from '../components/Navbar'
+import { AuthContext } from '../Context/context'
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
+  console.log("user",user)
   return (
     <div className="scroll-smooth">
       <Head>
@@ -12,7 +17,8 @@ const Home = () => {
       </Head>
 
       
-      <Main/>
+      <Main />
+      <Alerts/>
     </div>
   )
 }

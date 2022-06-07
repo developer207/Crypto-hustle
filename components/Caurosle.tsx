@@ -25,9 +25,9 @@ const Carosle = () => {
   const fetchTrendig = async () => {
     const res = await axios.get(TrendingCoins("inr"))
     setTrendingCoins(res.data)
-    console.log("res", res)
+   
   }
-  console.log(trendingCoins)
+  
 
   useEffect(() => {
     fetchTrendig()

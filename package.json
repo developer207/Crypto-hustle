@@ -12,6 +12,7 @@
     "@mui/material": "^5.8.2",
     "axios": "^0.27.2",
     "chart.js": "^3.8.0",
+    "firebase": "^9.8.2",
     "next": "latest",
     "react": "18.1.0",
     "react-alice-carousel": "^2.6.1",
