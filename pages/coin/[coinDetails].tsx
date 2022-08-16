@@ -53,10 +53,12 @@ const coinDetails = () => {
     
   }
   const fetchSingleCoin = async () => {
+    setLoding(true)
     if (coinDetails) {
       const { data } = await axios.get(SingleCoin(coinDetails))
       setSingleCoin(data);
     }
+    setLoding(false)
      
   }
   console.log("singleCoin",singleCoin)
@@ -78,7 +80,7 @@ const coinDetails = () => {
   return (
     <div>
       {loding && <LinearProgress />}
-      <div className='flex flex-col lg:flex-row pt-10 h-screen'>
+      {!loding &&  <div className='flex flex-col lg:flex-row pt-10 h-screen'>
         <div className='w-full lg:w-[30%] flex flex-col items-center space-y-5 px-6'>
           <img src={singleCoin?.image.large} alt="" />
           <h2 className='text-white text-center text-6xl font-bold'>{ `${singleCoin?.id}`}</h2>
@@ -111,7 +113,8 @@ const coinDetails = () => {
               className=' w-28 lg:w-60 lg:font-semibold lg:text-lg' variant={`${days==365?"contained":"outlined"}`}>1 Year</Button>
           </div>
         </div>
-      </div>
+      </div>}
+     
     </div>
   )
 }

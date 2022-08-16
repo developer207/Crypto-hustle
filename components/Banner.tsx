@@ -8,20 +8,28 @@ import { coins } from '../config/interfaces';
 import { AuthContext } from '../Context/context';
 import Carosle from './Caurosle'
 import CoinCard from './CoinCard'
+import Loader from './Loader';
 
 const Banner = () => {
     const [coins, setCoins] = useState<coins[]>([]);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     console.log("coins---- ", coins)
     const fetchCoins = async () => {
+        setIsLoading(true)
         const { data } = await axios.get(CoinList("INR"))
         setCoins(data)
+        setTimeout(() => {
+            setIsLoading(false);
+        },0) 
+       
 
     }
 
     useEffect(() => {
+
         fetchCoins();
 
     }, [])
@@ -60,8 +68,8 @@ const Banner = () => {
                     placeholder='Search Currency'
                     onChange={(e) => setSearch(e.target.value)}
                 />
-
-                <div className='flex flex-wrap justify-center mt-10'>
+                {isLoading && <div className='flex justify-center items-center py-5'><Loader/></div>}
+                {!isLoading && <><div className='flex flex-wrap justify-center mt-10'>
                     {handleSearch().slice((page - 1) * 10, (page - 1) * 10 + 12).map((coin) => {
                         return (
                             <CoinCard
@@ -78,11 +86,11 @@ const Banner = () => {
 
 
                 </div>
-                <div className='flex justify-center space-x-10 items-center py-4 bg-gray-900 px-20'>
-                    <Button onClick={() => {page>1?setPage(page - 1):setPage(page)}} className='bg-blue-600' variant="contained">prev</Button>
-                    <p className='font-bold text-white border border-blue-700 py-1 px-10 rounded-sm bg-blue-700'>{page}</p>
-                    <Button onClick={() => {setPage(page + 1)}} className='bg-blue-600' variant="contained">Next</Button>
-                </div>
+                    <div className='flex justify-center space-x-10 items-center py-4 bg-gray-900 px-20'>
+                        <Button onClick={() => { page > 1 ? setPage(page - 1) : setPage(page) }} className='bg-blue-600' variant="contained">prev</Button>
+                        <p className='font-bold text-white border border-blue-700 py-1 px-10 rounded-sm bg-blue-700'>{page}</p>
+                        <Button onClick={() => { setPage(page + 1) }} className='bg-blue-600' variant="contained">Next</Button>
+                    </div> </>}
 
 
             </div>
