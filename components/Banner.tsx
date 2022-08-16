@@ -13,13 +13,14 @@ const Banner = () => {
     const [coins, setCoins] = useState<coins[]>([]);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    
+
+    console.log("coins---- ", coins)
     const fetchCoins = async () => {
         const { data } = await axios.get(CoinList("INR"))
         setCoins(data)
 
     }
-   
+
     useEffect(() => {
         fetchCoins();
 
@@ -31,16 +32,16 @@ const Banner = () => {
             || coin.name.toLowerCase().includes(search)
         ))
     }
-    
+
     return (
         <div className=''>
             <div className='h-[27rem] relative'>
                 <img
-                    
+
                     className='cursor-pointer w-screen h-full absolute -z-10' src="https://res.cloudinary.com/zarmariya/image/upload/v1654066340/samples/banner2_kkmt5q.jpg" alt="" />
 
 
-                <Link href={"/ashok"}>
+                <Link href={"/"}>
                     <h1 className='text-white text-3xl lg:text-6xl text-center pt-10 font-bold '>
                         Crypto Hustle </h1>
                 </Link>
@@ -77,9 +78,13 @@ const Banner = () => {
 
 
                 </div>
+                <div className='flex justify-center space-x-10 items-center py-4 bg-gray-900 px-20'>
+                    <Button onClick={() => {page>1?setPage(page - 1):setPage(page)}} className='bg-blue-600' variant="contained">prev</Button>
+                    <p className='font-bold text-white border border-blue-700 py-1 px-10 rounded-sm bg-blue-700'>{page}</p>
+                    <Button onClick={() => {setPage(page + 1)}} className='bg-blue-600' variant="contained">Next</Button>
+                </div>
 
-                <Button onClick={() => setPage(page - 1)} className='bg-blue-600' variant="contained">prev</Button>
-                <Button onClick={() => setPage(page + 1)} className='bg-blue-600' variant="contained">Next</Button>
+
             </div>
 
 

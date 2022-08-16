@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
@@ -14,14 +15,11 @@ interface coins {
   name: string
 
 }
-// const items = [
-//   <img src="path-to-img" onDragStart={(e)=>e.preventDefault()} role="presentation" />,
-//   <img src="path-to-img" onDragStart={(e)=>e.preventDefault()} role="presentation" />,
-//   <img src="path-to-img" onDragStart={(e)=>e.preventDefault()} role="presentation" />,
-// ];
+
 
 const Carosle = () => {
   const [trendingCoins, setTrendingCoins] = useState<coins[]>([])
+  const router = useRouter();
   const fetchTrendig = async () => {
     const res = await axios.get(TrendingCoins("inr"))
     setTrendingCoins(res.data)
@@ -38,11 +36,12 @@ const Carosle = () => {
     let profit = coin?.price_change_percentage_24h
     return (
       <div className='flex flex-col items-center'>
-        <img className='w-24 h-24 rounded-full'
-        src={coin?.image}
-        alt={coin.name}
-        height="80"
-        style={{ marginBottom: 10 }}
+        <img className='w-24 h-24 rounded-full cursor-pointer'
+          src={coin?.image}
+          alt={coin.name}
+          height="80"
+          style={{ marginBottom: 10 }}
+          onClick={() => router.push(`coin/${coin.id}`) }
       />
         <span className='flex space-x-1'>
           <p className='text-white'>{coin?.symbol}</p>
